@@ -34,4 +34,17 @@ router.get('/items', function(req, res){
 		res.end();
 	});
 });
+
+router.get('/item', function(req, res){
+	db.findOne(function(item){
+		res.send(item);
+		res.end();
+	}, req.query.id);
+});
+router.get('/getNearItems', function(req, res){
+	db.getNearItems(function(items){
+		console.log(items);
+		res.send(items);
+	}, req.query.latitude, req.query.longitude, req.query.page);
+});
 module.exports = router;
